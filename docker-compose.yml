@@ -1,0 +1,9 @@
+version: "3"
+services:
+  songbot:
+    build: .
+    command: gunicorn -b 0.0.0.0:8080 app:app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8080:8080"
