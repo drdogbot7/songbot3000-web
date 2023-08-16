@@ -18,6 +18,12 @@
 
   <script>
     $(function () {
+      $(document).on("ajaxStart", function () {
+        $('#loading').show();
+      });
+      $(document).on("ajaxComplete", function () {
+        $('#loading').hide();
+      });
       $('#generate').bind('click', function () {
         $.getJSON($SCRIPT_ROOT + '/_do_songs', {
           number: $('input[name="number"]').val(),
@@ -36,7 +42,6 @@
       });
     });
   </script>
-  <p>
 
   <form action="">
     <div>
@@ -58,6 +63,7 @@
 
 
   <ul id=result></ul>
+  <img id="loading" src="{{ url_for('static', filename='loading.gif') }}" style="display:none;" />
 
 </body>
 

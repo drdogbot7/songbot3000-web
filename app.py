@@ -16,7 +16,8 @@ def song_bot_web():
 @app.route('/_do_songs')
 async def do_songs():
     loop = asyncio.get_running_loop()
-    number = request.args.get('number', 1, type=int)
+    raw_number = request.args.get('number', 1, type=int)
+    number = 10 if raw_number > 10 else raw_number
     prompt = request.args.get('prompt', "", type=str)
     temperature = request.args.get('temperature', 1.0, type=float)
 
