@@ -34,11 +34,14 @@
           temperature: $('input[name="temperature"]').val(),
         }, function (data) {
           data.forEach(element => {
-            $('#result').prepend("<li>" + element + "</li>");
+            $('#results').prepend("<li>" + element + "</li>");
           });
         });
         event.preventDefault();
       });
+      $("#reset").bind('click', function () {
+        $('#results').empty();
+      })
     });
   </script>
 
@@ -61,7 +64,7 @@
       <label for="number">Number</label>
       <input name="number" type="number" max="10" value="1" min="1">
     </div>
-    <input type="reset" value="Reset">
+    <input id="reset" type="reset" value="Reset">
     <button id="generate">Generate</button>
   </form>
 
@@ -69,7 +72,7 @@
     <img src="{{ url_for('static', filename='loading.gif') }}" />
   </div>
 
-  <ul id=result></ul>
+  <ul id="results"></ul>
 
   <a href="/history">Peruse History</a>
 </body>
