@@ -11,6 +11,7 @@ model_dir = "models"
 for entry in os.scandir(model_dir):
     if entry.is_dir():
         models += [entry.path]
+models.reverse()
 
 @app.route("/")
 def song_bot_web():
