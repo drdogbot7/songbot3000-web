@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songbot 3000 - History</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    $SCRIPT_ROOT = {{ request.script_root | tojson }};
+  </script>
+</head>
+
+<body>
+  <a href="/">
+    <img src="{{ url_for('static', filename='songbot.png') }}" />
+  </a>
+  <h1>SONGBOT 3000 - History</h1>
+  <ul id="songs">
+    {% for song in history %}
+    <li>{{ song }}</li>
+    {% endfor %}
+  </ul>
+
+</body>
+
+</html>

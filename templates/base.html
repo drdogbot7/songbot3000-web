@@ -12,7 +12,9 @@
 </head>
 
 <body>
-  <img src="{{ url_for('static', filename='songbot.png') }}" />
+  <a href="/">
+    <img src="{{ url_for('static', filename='songbot.png') }}" />
+  </a>
   <h1>SONGBOT 3000</h1>
   <ul id="songs"></ul>
 
@@ -24,23 +26,29 @@
       $(document).on("ajaxComplete", function () {
         $('#loading').hide();
       });
-      $('#generate').bind('click', function () {
+      $('#form').submit(function (event) {
         $.getJSON($SCRIPT_ROOT + '/_do_songs', {
           number: $('input[name="number"]').val(),
           prompt: $('input[name="prompt"]').val(),
+          model_name: $('select[name="model_name"]').val(),
           temperature: $('input[name="temperature"]').val(),
         }, function (data) {
           data.forEach(element => {
             $('#result').prepend("<li>" + element + "</li>");
           });
-
         });
-        return false;
+        event.preventDefault();
       });
     });
   </script>
 
-  <form action="" style="position:relative;">
+  <form id="form" action="">
+    <label for="model_name">Model</label>
+    <select name="model_name">
+      {% for model in models %}
+      <option value="{{model}}">{{model | replace("models/", "") }}</option>
+      {% endfor %}
+    </select>
     <div>
       <label for="prompt">Prompt</label>
       <input type="text" name="prompt">
@@ -63,6 +71,7 @@
 
   <ul id=result></ul>
 
+  <a href="/history">Peruse History</a>
 </body>
 
 </html>
